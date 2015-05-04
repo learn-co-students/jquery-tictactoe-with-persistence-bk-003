@@ -68,8 +68,12 @@ var attachListeners = function() {
     doTurn(event)
   })
   $("#lastGame").click(function() {
-    alert(firstRow() + secondRow() + thirdRow())
+    showLastGame();
   })
+}
+
+var showLastGame = function() {
+  alert(firstRow() + secondRow() + thirdRow())
 }
 var firstRow = function() {
   return getValues().slice(0,3).join("") + "\n";
