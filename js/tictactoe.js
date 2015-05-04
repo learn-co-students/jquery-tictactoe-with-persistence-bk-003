@@ -19,3 +19,10 @@ var updateState = function(event) {
 var attachListeners = function() {
 
 };
+
+var showLastGame = function() {
+
+};
+var lastGameString = function() {
+
+};
