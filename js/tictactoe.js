@@ -32,12 +32,25 @@ var player = function() {
 var noCellMatch = function(element) {
 	return (element.html() != player())
 }
+var clearBoard = function() {
+  $("td").text("")
+}
 var doTurn = function(event){
   updateState(event);
   if(checkWinner()) {
-    message("Player " + player() + " Won!")
+    saveGameState();
+    clearBoard();
+    message("Player " + player() + " Won!");
   }
   turn += 1;
+}
+var saveGameState = function() {
+  $("td").each(function(element) {
+    $('body').append($('<div>', {class: 'lastGame', "data-x": $(this).data("x"), "data-y": $(this).data("y"), style: "display: none;", text:getValue($(this)) }));
+  })
+}
+var getValue = function(element) {
+  return element.text() ? element.text() : "-"
 }
 var message = function(message) {
   alert(message);
@@ -50,10 +63,23 @@ var attachListeners = function() {
     doTurn(event)
   })
   $("#lastGame").click(function() {
-    alert("X|X|X\n" + "O|O|O\n" + "X|O|O")
+    alert(firstRow() + secondRow() + thirdRow())
   })
 }
+var firstRow = function() {
+  return getValues().slice(0,3).join("") + "\n";
+}
+var secondRow = function() {
+  return getValues().slice(3,6).join("") + "\n";
+}
+var thirdRow = function() {
+  return getValues().slice(6,9).join("") + "\n";
+}
 var getValues = function() {
-  var values = $(".lastGame").each
+  var values = [];
+  $(".lastGame").each(function() {
+    values.push($(this).text())
+  })
+  return values;
 };
-
+attachListeners();
