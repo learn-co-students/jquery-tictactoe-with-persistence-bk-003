@@ -106,7 +106,7 @@ describe('javascript', function() {
     it("should print out the results of the last game in an alert", function() {
       setFixtures('<body><table border="1" cellpadding="40"><tr><td data-x="0", data-y="0"></td><td data-x="1", data-y="0"></td><td data-x="2", data-y="0"></td></tr><tr><td data-x="0", data-y="1"></td><td data-x="1", data-y="1"></td><td data-x="2", data-y="1"></td></tr><tr><td data-x="0", data-y="2"></td><td data-x="1", data-y="2"></td><td data-x="2", data-y="2"></td></tr></table><button id="lastGame">Show Me Last Games Results!</button><div id="lastGameBox"></div></body>')
       attachListeners()
-      spyOn(window, "")
+      spyOn(window, "showLastGame")
       // x goes
       var selector = '[data-x="0"][data-y="0"]'
       $(selector).click()
@@ -123,8 +123,7 @@ describe('javascript', function() {
       var selector = '[data-x="2"][data-y="2"]'
       $(selector).click()
       $("#lastGame").click()
-      
-      expect(window.alert)
+      expect(window.showLastGame).toHaveBeenCalled
       expect(lastGameString()).toEqual("XOO\n-X-\n--X\n");     
     })
   });
