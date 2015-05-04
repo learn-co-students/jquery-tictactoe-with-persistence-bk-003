@@ -71,9 +71,12 @@ var attachListeners = function() {
     showLastGame();
   })
 }
+var lastGameString = function() {
+  return firstRow() + secondRow() + thirdRow()
+}
 
 var showLastGame = function() {
-  alert(firstRow() + secondRow() + thirdRow())
+  alert(lastGameString());
 }
 var firstRow = function() {
   return getValues().slice(0,3).join("") + "\n";
