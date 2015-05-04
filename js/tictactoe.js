@@ -35,18 +35,23 @@ var noCellMatch = function(element) {
 var clearBoard = function() {
   $("td").text("")
 }
+var resetGame = function() {
+  clearBoard();
+  var turn = 0;
+}
 var doTurn = function(event){
   updateState(event);
   if(checkWinner()) {
     saveGameState();
-    clearBoard();
+    resetGame();
     message("Player " + player() + " Won!");
   }
   turn += 1;
 }
 var saveGameState = function() {
+  $("#lastGameBox").empty();
   $("td").each(function(element) {
-    $('body').append($('<div>', {class: 'lastGame', "data-x": $(this).data("x"), "data-y": $(this).data("y"), style: "display: none;", text:getValue($(this)) }));
+    $('#lastGameBox').append($('<div>', {class: 'lastGame', "data-x": $(this).data("x"), "data-y": $(this).data("y"), style: "display: none;", text:getValue($(this)) }));
   })
 }
 var getValue = function(element) {
