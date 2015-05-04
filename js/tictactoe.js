@@ -49,5 +49,11 @@ var attachListeners = function() {
   $("tbody").click(function(event) {
     doTurn(event)
   })
+  $("#lastGame").click(function() {
+    alert("X|X|X\n" + "O|O|O\n" + "X|O|O")
+  })
 }
+var getValues = function() {
+  var values = $(".lastGame").each
+};
 
