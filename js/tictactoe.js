@@ -87,4 +87,3 @@ var getValues = function() {
   })
   return values;
 };
-attachListeners();
