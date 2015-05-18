@@ -128,10 +128,10 @@ describe('javascript', function() {
     });     
   });
 
-  describe( "#showLastGame", function() {
+  describe( "display the last game", function() {
+    
     it("should print out the results of the last game in an alert", function() {
       setFixtures('<body><table border="1" cellpadding="40"><tr><td data-x="0", data-y="0"></td><td data-x="1", data-y="0"></td><td data-x="2", data-y="0"></td></tr><tr><td data-x="0", data-y="1"></td><td data-x="1", data-y="1"></td><td data-x="2", data-y="1"></td></tr><tr><td data-x="0", data-y="2"></td><td data-x="1", data-y="2"></td><td data-x="2", data-y="2"></td></tr></table><div id="message"></div><button id="lastGame">Show Me Last Games Results!</button><div id="lastGameBox"></div></body>');
-      turn = 0;
       attachListeners();
       var selector = '[data-x="0"][data-y="0"]';
       $(selector).click();
@@ -169,7 +169,49 @@ describe('javascript', function() {
       // X O O
       // - X -
       // - - X
-      expect($("#lastGameBox").text()).toEqual("XOO\n-X-\n--X");
-    })
+      expect($("#lastGameBox").html()).toEqual("XOO<br>-X-<br>--X");
+    });
+
+    it("should print out the results of the last game if last game was a tie", function() {
+      setFixtures('<body><table border="1" cellpadding="40"><tr><td data-x="0", data-y="0"></td><td data-x="1", data-y="0"></td><td data-x="2", data-y="0"></td></tr><tr><td data-x="0", data-y="1"></td><td data-x="1", data-y="1"></td><td data-x="2", data-y="1"></td></tr><tr><td data-x="0", data-y="2"></td><td data-x="1", data-y="2"></td><td data-x="2", data-y="2"></td></tr></table><div id="message"></div><button id="lastGame">Show Me Last Games Results!</button><div id="lastGameBox"></div></body>');
+      attachListeners();
+      
+      $('[data-x="0"][data-y="0"]').click();
+      $('[data-x="1"][data-y="1"]').click();
+      $('[data-x="1"][data-y="2"]').click();
+      $('[data-x="0"][data-y="1"]').click();
+      $('[data-x="2"][data-y="1"]').click();
+      $('[data-x="2"][data-y="2"]').click();
+      $('[data-x="0"][data-y="2"]').click();
+      $('[data-x="1"][data-y="0"]').click();
+      $('[data-x="2"][data-y="0"]').click();
+      // _X_|_O_|_X_
+      // _O_|_O_|_X_
+      //  X | X | O
+      expect($("#message").text()).toEqual("Tie game");
+      // __|__|__
+      // __|__|__
+      //   |  | 
+      $("td").each(function() {
+        expect($(this).text()).toEqual("");
+      });
+      // ___|___|___
+      // ___|___|___
+      //    | X | O
+      var selector = '[data-x="1"][data-y="2"]';
+      $(selector).click();
+      expect($(selector).text()).toEqual("X");
+      var selector = '[data-x="2"][data-y="2"]';
+      $(selector).click();
+      expect($(selector).text()).toEqual("O");
+
+      // Show Me Last Games Results! (gets clicked)
+      $("#lastGame").click();
+
+      // X O X
+      // O O X
+      // X X O
+      expect($("#lastGameBox").html()).toEqual("XOX<br>OOX<br>XXO");
+    });
   });
 });
