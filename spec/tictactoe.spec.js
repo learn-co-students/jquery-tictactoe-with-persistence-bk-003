@@ -73,7 +73,7 @@ describe('javascript', function() {
 
   describe( "#checkWinner", function() {
     it("should tell me if there is a winning combo on the board for the current player", function() {
-      setFixtures('<body><table border="1" cellpadding="40"><tr><td data-x="0", data-y="0"></td><td data-x="1", data-y="0"></td><td data-x="2", data-y="0"></td></tr><tr><td data-x="0", data-y="1"></td><td data-x="1", data-y="1"></td><td data-x="2", data-y="1"></td></tr><tr><td data-x="0", data-y="2"></td><td data-x="1", data-y="2"></td><td data-x="2", data-y="2"></td></tr></table></body>');
+      setFixtures('<body><table border="1" cellpadding="40"><tr><td data-x="0", data-y="0"></td><td data-x="1", data-y="0"></td><td data-x="2", data-y="0"></td></tr><tr><td data-x="0", data-y="1"></td><td data-x="1", data-y="1"></td><td data-x="2", data-y="1"></td></tr><tr><td data-x="0", data-y="2"></td><td data-x="1", data-y="2"></td><td data-x="2", data-y="2"></td></tr></table><div id="message"></div></body>');
       attachListeners()
       spyOn(window, "updateState");
       var selector = '[data-x="0"][data-y="0"]'
@@ -84,7 +84,7 @@ describe('javascript', function() {
     });     
 
     it("should tell me if there is a winning combo on the board for the current player (vertical)", function() {
-      setFixtures('<body><table border="1" cellpadding="40"><tr><td data-x="0", data-y="0"></td><td data-x="1", data-y="0"></td><td data-x="2", data-y="0"></td></tr><tr><td data-x="0", data-y="1"></td><td data-x="1", data-y="1"></td><td data-x="2", data-y="1"></td></tr><tr><td data-x="0", data-y="2"></td><td data-x="1", data-y="2"></td><td data-x="2", data-y="2"></td></tr></table></body>');
+      setFixtures('<body><table border="1" cellpadding="40"><tr><td data-x="0", data-y="0"></td><td data-x="1", data-y="0"></td><td data-x="2", data-y="0"></td></tr><tr><td data-x="0", data-y="1"></td><td data-x="1", data-y="1"></td><td data-x="2", data-y="1"></td></tr><tr><td data-x="0", data-y="2"></td><td data-x="1", data-y="2"></td><td data-x="2", data-y="2"></td></tr></table><div id="message"></div></body>');
       attachListeners();
       spyOn(window, "message");
       // x goes
@@ -106,7 +106,7 @@ describe('javascript', function() {
     });     
 
     it("should tell me if there is a winning combo on the board for the current player (diagonal)", function() {
-      setFixtures('<body><table border="1" cellpadding="40"><tr><td data-x="0", data-y="0"></td><td data-x="1", data-y="0"></td><td data-x="2", data-y="0"></td></tr><tr><td data-x="0", data-y="1"></td><td data-x="1", data-y="1"></td><td data-x="2", data-y="1"></td></tr><tr><td data-x="0", data-y="2"></td><td data-x="1", data-y="2"></td><td data-x="2", data-y="2"></td></tr></table></body>');
+      setFixtures('<body><table border="1" cellpadding="40"><tr><td data-x="0", data-y="0"></td><td data-x="1", data-y="0"></td><td data-x="2", data-y="0"></td></tr><tr><td data-x="0", data-y="1"></td><td data-x="1", data-y="1"></td><td data-x="2", data-y="1"></td></tr><tr><td data-x="0", data-y="2"></td><td data-x="1", data-y="2"></td><td data-x="2", data-y="2"></td></tr></table><div id="message"></div></body>');
       attachListeners()
       spyOn(window, "message");
       // x goes
@@ -124,33 +124,52 @@ describe('javascript', function() {
       // x goes
       var selector = '[data-x="2"][data-y="2"]';
       $(selector).click();
-      expect(window.message).toHaveBeenCalledWith("Player X Won!")    });     
+      expect(window.message).toHaveBeenCalledWith("Player X Won!");
+    });     
   });
 
   describe( "#showLastGame", function() {
     it("should print out the results of the last game in an alert", function() {
-      setFixtures('<body><table border="1" cellpadding="40"><tr><td data-x="0", data-y="0"></td><td data-x="1", data-y="0"></td><td data-x="2", data-y="0"></td></tr><tr><td data-x="0", data-y="1"></td><td data-x="1", data-y="1"></td><td data-x="2", data-y="1"></td></tr><tr><td data-x="0", data-y="2"></td><td data-x="1", data-y="2"></td><td data-x="2", data-y="2"></td></tr></table><button id="lastGame">Show Me Last Games Results!</button><div id="lastGameBox"></div></body>');
+      setFixtures('<body><table border="1" cellpadding="40"><tr><td data-x="0", data-y="0"></td><td data-x="1", data-y="0"></td><td data-x="2", data-y="0"></td></tr><tr><td data-x="0", data-y="1"></td><td data-x="1", data-y="1"></td><td data-x="2", data-y="1"></td></tr><tr><td data-x="0", data-y="2"></td><td data-x="1", data-y="2"></td><td data-x="2", data-y="2"></td></tr></table><div id="message"></div><button id="lastGame">Show Me Last Games Results!</button><div id="lastGameBox"></div></body>');
+      turn = 0;
       attachListeners();
-      spyOn(window, "showLastGame");
-      // x goes
       var selector = '[data-x="0"][data-y="0"]';
       $(selector).click();
-      // y goes
       var selector = '[data-x="1"][data-y="0"]';
       $(selector).click();
-      // x goes
       var selector = '[data-x="1"][data-y="1"]';
       $(selector).click();
-      // y goes
       var selector = '[data-x="2"][data-y="0"]';
       $(selector).click();
-      // x goes
       var selector = '[data-x="2"][data-y="2"]';
       $(selector).click();
+      // _X_|_O_|_O_
+      // ___|_X_|___
+      //    |   | X
+      expect($("#message").text()).toEqual("Player X Won!");
+      // __|__|__
+      // __|__|__
+      //   |  | 
+      $("td").each(function() {
+        expect($(this).text()).toEqual("");
+      });
+      // ___|___|___
+      // ___|___|___
+      //    | X | O
+      var selector = '[data-x="1"][data-y="2"]';
+      $(selector).click();
+      expect($(selector).text()).toEqual("X");
+      var selector = '[data-x="2"][data-y="2"]';
+      $(selector).click();
+      expect($(selector).text()).toEqual("O");
+
+      // Show Me Last Games Results! (gets clicked)
       $("#lastGame").click();
-      expect(window.showLastGame).toHaveBeenCalled();
-      expect(lastGameString()).toEqual("XOO\n-X-\n--X\n");     
+
+      // X O O
+      // - X -
+      // - - X
+      expect($("#lastGameBox").text()).toEqual("XOO\n-X-\n--X");
     })
   });
-
 });
