@@ -1,7 +1,12 @@
 <html>
-	<head>	
-  <script src="http://code.jquery.com/jquery-latest.js"></script>
+	<head>
+		<title>jQuery Tic-Tac-Toe with Persistence</title>
 	</head>
+	<style>
+		#lastGameBox {
+			font-family: monospace;
+		}
+	</style>
 	<body>
 		<table border="1" cellpadding="40">
 			<tr>
@@ -19,11 +24,18 @@
 				<td data-x="1", data-y="2"></td>
 				<td data-x="2", data-y="2"></td>
 			</tr>
-
 		</table>
+		<br>
+		<div id="message"></div>
 		<button id="lastGame">Show Me Last Game's Results!</button>
+		<br>
+		<br>
 		<div id="lastGameBox"></div>
+		<br>
 	</body>
+	<script type="text/javascript" src="lib/jquery.min.js"></script>
 	<script type="text/javascript" src="js/tictactoe.js"></script>
-
+	<script type="text/javascript">
+		attachListeners();
+	</script>
 </html>
